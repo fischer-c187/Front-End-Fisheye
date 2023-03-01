@@ -1,0 +1,29 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 90px;
+
+  &__title {
+    color: #901C1C;
+    margin-right: 6%;
+    font-size: 2rem;
+  }
+
+  &__logo {
+    height: 50px;
+    margin-left: 100px;
+
+    &--no-margin {
+      margin: 0;
+    }
+  }
+
+  
+}
+
+.description {
+
+
+}

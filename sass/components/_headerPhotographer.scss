@@ -1,0 +1,26 @@
+.photograph-header {
+  background-color: #FAFAFA;
+  height: 300px;
+  margin: 0;
+  display: flex;
+  padding: 0 3em;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.description {
+
+  &__name {
+    font-size: 4rem;
+  }
+
+  &__location {
+    font-size: 1.5rem;
+  }
+
+  &__tagline {
+    font-size: 1.125rem;
+    opacity: 0.8;
+    margin-top: 1.25rem;
+  }
+}

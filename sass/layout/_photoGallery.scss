@@ -1,0 +1,8 @@
+.photo-gallery {
+  width: 100%;
+  display: grid;
+  grid-template: 350px / repeat(auto-fit, minmax(300px, 1fr));
+  grid-auto-rows: 350px;
+  gap: 1.3% 7%;
+  margin-top: 3em;
+}

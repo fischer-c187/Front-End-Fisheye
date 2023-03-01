@@ -5,7 +5,7 @@ body {
     margin: 0;
 }
 
-
+/* fait */
 header {
     display: flex;
     flex-direction: row;
@@ -13,17 +13,17 @@ header {
     align-items: center;
     height: 90px;
 }
-
+/* fait */
 h1 {
     color: #901C1C;
     margin-right: 100px;
 }
-
+/* fait */
 .logo {
     height: 50px;
     margin-left: 100px;
 }
-
+/* fait */
 .photographer_section {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -44,7 +44,7 @@ h1 {
     font-size: 36px;
 }
 
-.photographer_section article img {
+.photographer_section article a img {
     height: 200px;
     width: 200px;
 }
