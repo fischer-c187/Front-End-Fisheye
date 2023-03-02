@@ -6,7 +6,7 @@ import { PhotographersApi, PhotoApi } from '../api/api.js';
 import { LikeCounter } from '../count/counter.js';
 import { LikeSubject } from '../count/likeSubject.js';
 import { SorterForm } from '../template/sorterForm.js';
-
+import { PhotoSorting } from '../sorter/SortingPhoto.js';
 
 /**
  * contient l'url de notre api/fichier json
@@ -77,8 +77,8 @@ async function renderPhotographer(photographe) {
  * generation des elements de la gallerie et ajout dans la balise main
  */
 async function renderGallery(fullMedia) {
-  const photoWrapper = document.createElement('div');
-  photoWrapper.classList.add('photo-gallery');
+  const photoWrapper = document.querySelector('.photo-gallery');
+  
 
   const likeCounter = new LikeCounter();
   const likeObserver = new LikeSubject();
@@ -90,7 +90,7 @@ async function renderGallery(fullMedia) {
     photoWrapper.append(Template.createMediaCard());
   });
 
-  document.querySelector('main').append(photoWrapper);
+  
 }
 
 /**
@@ -101,10 +101,10 @@ async function main() {
   const medias = await getAllMedia();
   const sorterPhoto = new SorterForm(medias);
 
-  sorterPhoto.render()
   await renderPhotographer(photographe);
   await renderGallery(medias);
-
+  
+  sorterPhoto.render()
 }
 
 main();

@@ -15,10 +15,9 @@ export class SorterForm {
 
   onChangeSorter(){
     this._sorterFormWrapper
-      .querySelector('.sorter-form')
+      .querySelector('#sorter-select')
       .addEventListener('change', event => {
         const sorter = event.target.value;
-        console.log('sorter media debut', this._medias)
         this.sorterMedia(sorter);
         
       })
@@ -26,24 +25,36 @@ export class SorterForm {
 
   sorterMedia(sorter) {
     PhotoSorting.sorte(this._medias, sorter)
-    this.clearMedia()
-    this._medias.forEach( media => {
-      const Template = new MediaCard(photo)
-    })
+    this._medias
+      .forEach( media => {
+        const element = this._mediaWrapper.querySelector(`#id-${media.id}`)
+        this._mediaWrapper.append(element)
+      })
+  }
+
+  initialSorte () {
+    this._sorterFormWrapper
+    .querySelector('#sorter-select')
+    .dispatchEvent(new Event('change'))
   }
 
   render() {
     const sorterForm = `
       <form action="#" method="POST" class="sorter-form">
-        <label for="sorter-select">Triez par</label>
-        <select name="sorter-select" id="sorter-select">
+        <label for="sorter-select" class="sorter-form__label">
+          Trier par
+        </label>
+        <div class="select">
+        <select name="sorter-select" id="sorter-select" class="sorter-form__select">
             <option value="like">Popularité</option>
             <option value="date">Date</option>
             <option value="alpha">Titre</option>
         </select>
+        </div>
       </form>
     `
     this._sorterFormWrapper.innerHTML = sorterForm;
     this.onChangeSorter()
+    this.initialSorte()
   }
 }

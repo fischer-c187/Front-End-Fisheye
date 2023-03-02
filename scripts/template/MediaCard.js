@@ -12,9 +12,14 @@ export class MediaCard {
     this._media = media;
     this._wrapper = document.createElement('article');
     this._wrapper.classList.add('gallery-card');
+    this._wrapper.setAttribute('id', `id-${this._media.id}`)
     // nous permet de savoir si cette photo est deja like ou pas
     this._liked = false;
     this._Observer = likedObserver;
+  }
+
+  get media () {
+    return this._media;
   }
 
   /**
