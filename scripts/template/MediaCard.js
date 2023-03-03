@@ -65,12 +65,12 @@ export class MediaCard {
     }
 
     const card = `
-      <a href="${this._media.url}">
+      <a href="${this._media.url}" class='open-lightbox'>
         ${mediaBalise}
       </a>
       <div class="gallery-card__description">
-        <a href="${this._media.url}" class="gallery-card__title">
-        </a>
+        <p class="gallery-card__title">
+        </p>
         <p class="gallery-card__like">
           <span class="gallery-card__nbrLike">
           </span>

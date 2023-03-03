@@ -6,7 +6,7 @@ import { PhotographersApi, PhotoApi } from '../api/api.js';
 import { LikeCounter } from '../count/counter.js';
 import { LikeSubject } from '../count/likeSubject.js';
 import { SorterForm } from '../template/sorterForm.js';
-import { PhotoSorting } from '../sorter/SortingPhoto.js';
+import { Lightbox } from '../template/lightbox.js';
 
 /**
  * contient l'url de notre api/fichier json
@@ -28,7 +28,6 @@ function getId() {
  * @returns {Object Photographer}
  */
 async function getPhotographe() {
-  // ! await new demander mentor
   const photographeObject = await new PhotographersApi(
     URLEndpoint
   ).photographById(getId());
@@ -100,10 +99,11 @@ async function main() {
   const photographe = await getPhotographe();
   const medias = await getAllMedia();
   const sorterPhoto = new SorterForm(medias);
+  const lightbox = new Lightbox();
 
   await renderPhotographer(photographe);
   await renderGallery(medias);
-  
+  lightbox.render()
   sorterPhoto.render()
 }
 

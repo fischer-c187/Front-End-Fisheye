@@ -1,5 +1,5 @@
 import { PhotoSorting } from '../sorter/SortingPhoto.js';
-import { MediaCard } from './MediaCard.js';
+
 export class SorterForm {
   constructor (data) {
     this._medias = data;
