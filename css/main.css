@@ -67,6 +67,38 @@ body {
   margin-top: 3em;
 }
 
+.lightbox {
+  border: none;
+  min-width: 100%;
+  min-height: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.lightbox__close {
+  position: absolute;
+  right: 0;
+  top: 10%;
+}
+.lightbox__content {
+  width: clamp(375px, 100%, 1400px);
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 50px;
+}
+.lightbox__image {
+  max-height: 80vh;
+  max-width: min(75vw, 1200px);
+}
+.lightbox__icon {
+  font-size: 3rem;
+  color: #901C1C;
+}
+
 .sorter-form {
   margin-top: 3em;
   display: flex;
