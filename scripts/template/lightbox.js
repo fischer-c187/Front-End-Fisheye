@@ -27,9 +27,11 @@ export class Lightbox {
 
   replaceMediaElement() {
     const oldMedia = this._wrapper.querySelector('.lightbox__image');
+
     const src = this._currentElement
       .querySelector('.gallery-card__image')
       .getAttribute('src');
+
     const mediaElement = src.endsWith('.mp4')
       ? this.createElement('video', src)
       : this.createElement('img', src);
@@ -39,26 +41,40 @@ export class Lightbox {
       .parentNode.replaceChild(mediaElement, oldMedia);
   }
 
-  replaceTitle () {
-    const newTitle = this._currentElement
-      .querySelector('.gallery-card__title')
-      .innerText
+  replaceTitle() {
+    const newTitle = this._currentElement.querySelector(
+      '.gallery-card__title'
+    ).innerText;
 
-    this._wrapper.querySelector('.lightbox__title').innerText = newTitle
+    this._wrapper.querySelector('.lightbox__title').innerText = newTitle;
+  }
+
+  switchMedia(direction) {
+    let newArticle = null;
+    if (direction === 'next') {
+      newArticle = this._currentElement.nextSibling;
+      this._currentElement = newArticle ? newArticle : this.getFirstArticle();
+    } else if (direction === 'previous') {
+      newArticle = this._currentElement.previousSibling;
+      this._currentElement = newArticle ? newArticle : this.getLastArticle();
+    }
+    this.replaceMediaElement();
+    this.replaceTitle();
   }
 
   open() {
     const allLink = document.querySelectorAll('.open-lightbox');
 
-    // utilisation d'une fonction fleche pour que this sois egale a l'objet
+    // utilisation d'une fonction fleche pour que this soit egale a l'objet
     allLink.forEach((element) => {
       element.addEventListener('click', (event) => {
         event.preventDefault();
 
         this._currentElement = event.target.parentNode.parentNode;
 
-        this.replaceMediaElement(event.target)
-        this.replaceTitle()
+        this.replaceMediaElement(event.target);
+        this.replaceTitle();
+        this.keyNavigation();
         this._wrapper.showModal();
       });
     });
@@ -76,37 +92,29 @@ export class Lightbox {
   nextMedia() {
     this._wrapper
       .querySelector('.lightbox__nextImage')
-      .addEventListener('click', () => {
-        const next = this._currentElement.nextSibling;
-        if (next) {
-          this._currentElement = next;
-          this.replaceMediaElement();
-          this.replaceTitle()
-        }
-        else {
-          this._currentElement = this.getFirstArticle();
-          this.replaceMediaElement();
-          this.replaceTitle()
-        }
+      .addEventListener('click', (event) => {
+        event.preventDefault();
+        this.switchMedia('next');
       });
   }
 
   previousMedia() {
     this._wrapper
       .querySelector('.lightbox__previousImage')
-      .addEventListener('click', () => {
-        const previous = this._currentElement.previousSibling;
-        if (previous) {
-          this._currentElement = previous;
-          this.replaceMediaElement();
-          this.replaceTitle()
-        }
-        else {
-          this._currentElement = this.getLastArticle();
-          this.replaceMediaElement();
-          this.replaceTitle()
-        }
+      .addEventListener('click', (event) => {
+        event.preventDefault();
+        this.switchMedia('previous');
       });
+  }
+
+  keyNavigation() {
+    document.addEventListener('keydown', (event) => {
+      if (event.code === 'ArrowRight') {
+        this.switchMedia('next');
+      } else if (event.code === 'ArrowLeft') {
+        this.switchMedia('previous');
+      }
+    });
   }
 
   render() {
@@ -127,6 +135,7 @@ export class Lightbox {
     this.close();
     this.nextMedia();
     this.previousMedia();
+
     document.querySelector('main').append(this._wrapper);
   }
 }
