@@ -72,9 +72,6 @@ body {
   min-width: 100%;
   min-height: 100%;
   margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 .lightbox__close {
   position: absolute;
@@ -84,6 +81,7 @@ body {
 .lightbox__content {
   width: clamp(375px, 100%, 1400px);
   min-height: 100vh;
+  margin: auto;
   position: relative;
   display: flex;
   justify-content: space-between;
@@ -97,6 +95,11 @@ body {
 .lightbox__icon {
   font-size: 3rem;
   color: #901C1C;
+}
+.lightbox__title {
+  font-size: 1.5rem;
+  color: #901C1C;
+  margin-top: 0.2em;
 }
 
 .sorter-form {

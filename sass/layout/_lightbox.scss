@@ -3,9 +3,6 @@
   min-width: 100%;
   min-height: 100%;
   margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 
   &__close {
     position: absolute;
@@ -15,6 +12,7 @@
   &__content {
     width: clamp(375px, 100%, 1400px);
     min-height: 100vh;
+    margin: auto;
     position: relative;
     display: flex;
     justify-content: space-between;
@@ -29,6 +27,12 @@
 
   &__icon {
     font-size: 3rem;
-    color: #901C1C;
+    color: $icon-media-color;
+  }
+
+  &__title {
+    font-size: 1.5rem;
+    color: $icon-media-color;
+    margin-top: 0.2em;
   }
 }

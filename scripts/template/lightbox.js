@@ -39,6 +39,14 @@ export class Lightbox {
       .parentNode.replaceChild(mediaElement, oldMedia);
   }
 
+  replaceTitle () {
+    const newTitle = this._currentElement
+      .querySelector('.gallery-card__title')
+      .innerText
+
+    this._wrapper.querySelector('.lightbox__title').innerText = newTitle
+  }
+
   open() {
     const allLink = document.querySelectorAll('.open-lightbox');
 
@@ -50,7 +58,7 @@ export class Lightbox {
         this._currentElement = event.target.parentNode.parentNode;
 
         this.replaceMediaElement(event.target)
-
+        this.replaceTitle()
         this._wrapper.showModal();
       });
     });
@@ -73,10 +81,12 @@ export class Lightbox {
         if (next) {
           this._currentElement = next;
           this.replaceMediaElement();
+          this.replaceTitle()
         }
         else {
           this._currentElement = this.getFirstArticle();
           this.replaceMediaElement();
+          this.replaceTitle()
         }
       });
   }
@@ -89,10 +99,12 @@ export class Lightbox {
         if (previous) {
           this._currentElement = previous;
           this.replaceMediaElement();
+          this.replaceTitle()
         }
         else {
           this._currentElement = this.getLastArticle();
           this.replaceMediaElement();
+          this.replaceTitle()
         }
       });
   }
@@ -102,7 +114,10 @@ export class Lightbox {
       <div class="lightbox__content">
         <a href="#" class='lightbox__close'><i class="fa-solid fa-xmark lightbox__icon"></i></a>
         <a href="#" class="lightbox__previousImage"><i class="fa-solid fa-angle-left lightbox__icon"></i></a>
-        <img src="" alt="" class='lightbox__image'>
+        <div class="lightbox__media">
+          <img src="" alt="" class='lightbox__image'>
+          <p class="lightbox__title">test</p>
+        </div>
         <a href="#" class="lightbox__nextImage"><i class="fa-solid fa-angle-right lightbox__icon"></i></a>
       </div>
     `;
@@ -111,7 +126,7 @@ export class Lightbox {
     this.open();
     this.close();
     this.nextMedia();
-    this.previousMedia()
+    this.previousMedia();
     document.querySelector('main').append(this._wrapper);
   }
 }
