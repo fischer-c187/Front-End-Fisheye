@@ -19,7 +19,7 @@ export function photographerCardPresentation (photographer) {
         </p>
         <p class="description__tagline card__tagline"></p>
       </div>
-      <button type="button" class="contact_button" onclick="displayModal()">Contactez-moi</button>
+      <button type="button" class="contact_button" id="contact-form">Contactez-moi</button>
       <img src="${photographer.image}" alt="" class="card__image">
     `
 

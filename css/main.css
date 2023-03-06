@@ -160,35 +160,79 @@ select option {
   text-align: center;
 }
 
-#contact_modal {
-  display: none;
-}
-
-.modal {
+.contact-modal {
   border-radius: 5px;
   background-color: #DB8876;
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  padding: 35px;
+  min-width: clamp(600px, 50%, 700px);
+  padding: 2em;
   margin: auto;
+  border: none;
+  position: relative;
+  box-shadow: -5px 10px 30px rgba(0, 0, 0, 0.25);
+  font-family: "DM Sans", sans-serif;
 }
 
-.modal header {
+.header-contact {
   justify-content: space-between;
   width: 100%;
 }
-
-.modal header img {
+.header-contact__close {
   cursor: pointer;
+  position: absolute;
+  top: 32px;
+  right: 32px;
+}
+.header-contact__title {
+  font-size: 4rem;
+  font-weight: normal;
+  text-align: left;
+  line-height: 3.1rem;
+}
+.header-contact__photographe {
+  display: block;
+  margin-top: 0.3em;
 }
 
-.modal header h2 {
-  font-size: 64px;
-  font-weight: normal;
+.contact {
+  display: flex;
+  flex-direction: column;
+  margin: 1.5em 0;
+}
+.contact__input {
+  height: 60px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.5rem;
+  font-family: "DM Sans", sans-serif;
+}
+.contact__input:focus-visible {
+  outline: none;
+}
+.contact__area {
+  height: 170px;
+}
+.contact__submit {
+  margin-top: 1em;
+}
+.contact__label {
+  color: #312E2E;
+  font-size: 2rem;
+  margin-top: 0.125em;
+}
+.contact__success-message {
+  font-size: 2rem;
+  margin: 1em;
+}
+.contact--success {
   text-align: center;
+}
+
+.error-form {
+  font-family: "DM Sans", sans-serif;
+  margin-top: 0.15em;
+}
+.error-form strong {
+  font-weight: 400;
 }
 
 .photograph-header {

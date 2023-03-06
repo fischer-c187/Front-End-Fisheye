@@ -1,0 +1,27 @@
+.sorter-form {
+  margin-top: 3em;
+  display: flex;
+  align-items: center;
+  gap: 25px;
+
+  &__label {
+    font-weight: 700;
+    font-size: 1.125rem;
+  }
+
+  &__select {
+    width: 170px;
+    height: 70px;
+    color: white;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.125rem;
+    background: #911C1C;
+  }
+
+  
+}
+select option {
+    background: #911C1C;
+  }

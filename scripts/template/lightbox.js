@@ -1,10 +1,24 @@
+/**
+ * la class lightbox gere l'affichage de la galerie en grand format.
+ * @class
+ */
 export class Lightbox {
+  /**
+   * creer une instance de la class lightbox
+   * la fenetre modal est initialisee a vide
+   */
   constructor() {
     this._currentElement = null;
     this._wrapper = document.createElement('dialog');
     this._wrapper.classList.add('lightbox');
   }
 
+  /**
+   * creer un element img ou video selon la balise demandee
+   * @param {String} balise la balise de l'element a creer : img ou video
+   * @param {String} src l'url de la source
+   * @returns {HTMLElement}
+   */
   createElement(balise, src) {
     const element = document.createElement(balise);
     element.classList.add('lightbox__image');
@@ -16,15 +30,27 @@ export class Lightbox {
     return element;
   }
 
+  
+  /**
+   * recupere le premier article de la page
+   * @returns {HTMLElement}
+   */
   getFirstArticle() {
     return document.querySelector('article');
   }
 
+  /**
+   * recupere le dernier element de la page
+   * @returns {HTMLElement}
+   */
   getLastArticle() {
     const allArticle = document.querySelectorAll('article');
     return allArticle[allArticle.length - 1];
   }
 
+  /**
+   * remplace l'element media dans la fenetre par celui de l'article courant
+   */
   replaceMediaElement() {
     const oldMedia = this._wrapper.querySelector('.lightbox__image');
 
@@ -32,6 +58,7 @@ export class Lightbox {
       .querySelector('.gallery-card__image')
       .getAttribute('src');
 
+    // on genere notre balise selon la fin de la source
     const mediaElement = src.endsWith('.mp4')
       ? this.createElement('video', src)
       : this.createElement('img', src);
@@ -40,7 +67,10 @@ export class Lightbox {
       .querySelector('.lightbox__image')
       .parentNode.replaceChild(mediaElement, oldMedia);
   }
-
+  
+  /**
+   * remplace le titre du media par celui de l'article courant
+   */
   replaceTitle() {
     const newTitle = this._currentElement.querySelector(
       '.gallery-card__title'
@@ -49,6 +79,10 @@ export class Lightbox {
     this._wrapper.querySelector('.lightbox__title').innerText = newTitle;
   }
 
+  /**
+   * gere la navigation du media afficher
+   * @param {String} direction permet de determine le sens de navigation
+   */
   switchMedia(direction) {
     let newArticle = null;
     if (direction === 'next') {
@@ -57,11 +91,16 @@ export class Lightbox {
     } else if (direction === 'previous') {
       newArticle = this._currentElement.previousSibling;
       this._currentElement = newArticle ? newArticle : this.getLastArticle();
+    } else {
+      throw "unknow Direction"
     }
     this.replaceMediaElement();
     this.replaceTitle();
   }
 
+  /**
+   * ouvre la lightbox lorsqu'on clique sur une image
+   */
   open() {
     const allLink = document.querySelectorAll('.open-lightbox');
 
@@ -80,6 +119,9 @@ export class Lightbox {
     });
   }
 
+  /**
+   * ferme la lightbox quand on clique sur l'icone de fermeture
+   */
   close() {
     this._wrapper
       .querySelector('.lightbox__close')
@@ -89,6 +131,9 @@ export class Lightbox {
       });
   }
 
+  /**
+   * passe au media suivant quand on clique sur l'icone suivant
+   */
   nextMedia() {
     this._wrapper
       .querySelector('.lightbox__nextImage')
@@ -98,6 +143,9 @@ export class Lightbox {
       });
   }
 
+  /**
+   * passe au media precedent quand on clique sur l'icone precedent
+   */
   previousMedia() {
     this._wrapper
       .querySelector('.lightbox__previousImage')
@@ -107,6 +155,9 @@ export class Lightbox {
       });
   }
 
+  /**
+   * gere la navigation des medias avec les fleches du clavier
+   */
   keyNavigation() {
     document.addEventListener('keydown', (event) => {
       if (event.code === 'ArrowRight') {
@@ -117,6 +168,9 @@ export class Lightbox {
     });
   }
 
+  /**
+   * genere le contenu de la lightbox et initialise les events 
+   */
   render() {
     const lightboxContent = `
       <div class="lightbox__content">

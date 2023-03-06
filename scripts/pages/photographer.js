@@ -7,7 +7,7 @@ import { LikeCounter } from '../count/counter.js';
 import { LikeSubject } from '../count/likeSubject.js';
 import { SorterForm } from '../template/sorterForm.js';
 import { Lightbox } from '../template/lightbox.js';
-
+import { ContactForm } from '../template/contactForm.js';
 /**
  * contient l'url de notre api/fichier json
  */
@@ -100,11 +100,13 @@ async function main() {
   const medias = await getAllMedia();
   const sorterPhoto = new SorterForm(medias);
   const lightbox = new Lightbox();
+  const contactForm = new ContactForm()
 
   await renderPhotographer(photographe);
   await renderGallery(medias);
   lightbox.render()
   sorterPhoto.render()
+  contactForm.render()
 }
 
 main();
