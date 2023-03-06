@@ -59,19 +59,19 @@ export class MediaCard {
     let mediaBalise = null;
 
     if (this._media.isImage()) {
-      mediaBalise = `<img src="${this._media.url}" class="gallery-card__image">`;
+      mediaBalise = `<img src="${this._media.url}" class="gallery-card__image" alt="${this._media.title}">`;
     } else {
-      mediaBalise = `<video src="${this._media.url}" class="gallery-card__image"></video>`;
+      mediaBalise = `<video src="${this._media.url}" class="gallery-card__image" alt="${this._media.title}"></video>`;
     }
 
     const card = `
-      <a href="${this._media.url}" class='open-lightbox'>
+      <a href="${this._media.url}" aria-label="Open Lightbox" class='open-lightbox'>
         ${mediaBalise}
       </a>
       <div class="gallery-card__description">
         <p class="gallery-card__title">
         </p>
-        <p class="gallery-card__like">
+        <p class="gallery-card__like" aria-label="likes" >
           <span class="gallery-card__nbrLike">
           </span>
           <i class="fa-solid fa-heart"></i>

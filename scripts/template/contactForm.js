@@ -11,6 +11,7 @@ export class ContactForm {
   constructor() {
     this._wrapper = document.createElement('dialog');
     this._wrapper.classList.add('contact-modal');
+    this._wrapper.setAttribute('aria-labelledby', 'contact-title-label')
     this._error = {
       firstname: {
         message:
@@ -193,9 +194,9 @@ export class ContactForm {
     wrapperSuccess.innerHTML =
       '\
       <div class="contact--success"> \
-          <p class="contact__success-message">Votre message a bien été envoyé !</p> \
-          <button class="contact__btn-close contact_button">Fermer</button> \
-        </div>';
+        <p class="contact__success-message">Votre message a bien été envoyé !</p> \
+        <button class="contact__btn-close contact_button" aria-label="close dialog">Fermer</button> \
+      </div>';
 
     this._wrapper.innerHTML = '';
     this._wrapper.append(wrapperSuccess);
@@ -217,25 +218,26 @@ export class ContactForm {
     const photographe = document.querySelector('.description__name').innerText;
     const form = `
       <header class="header-contact">
-        <h2 class="header-contact__title">
+        <h2 class="header-contact__title" id="contact-title-label">
           Contactez-moi
           <span class="header-contact__photographe">${photographe}</span>
         </h2>
-        <a href="#" class="header-contact__close">
-          <img src="assets/icons/close.svg" alt="">
-        </a>
+        
+        <button type="button" class="header-contact__close" aria-label="Close Dialog">
+          <img src="assets/icons/close.svg" alt="close dialog">
+        </button>
 
       </header>
       <form class="contact">
-          <label for="firstname" class="contact__label">Prénom</label>
-          <input type="text" name="firstname" id="firstname" class="contact__input">
-          <label for="lastname" class="contact__label">Nom</label>
-          <input type="text" name="lastname" id="lastname" class="contact__input">
-          <label for="email" class="contact__label">Email</label>
-          <input type="text" name="email" id="email" class="contact__input">
-          <label for="message" class="contact__label">Votre Message</label>
-          <textarea name="message" id="message" class="contact__area contact__input"></textarea>
-        <button type="submit" class="contact_button contact__submit">Envoyer</button>
+          <label for="firstname" class="contact__label" id="first_name">Prénom</label>
+          <input type="text" name="firstname" id="firstname" class="contact__input" aria-labelledby="first_name">
+          <label for="lastname" class="contact__label" id="last_name" >Nom</label>
+          <input type="text" name="lastname" id="lastname" class="contact__input" aria-labelledby="last_name">
+          <label for="email" class="contact__label" id="email">Email</label>
+          <input type="text" name="email" id="email" class="contact__input" aria-labelledby="email">
+          <label for="message" class="contact__label" id="your_message">Votre Message</label>
+          <textarea name="message" id="message" class="contact__area contact__input" aria-labelledby="your_message"></textarea>
+        <button type="submit" class="contact_button contact__submit" aria-label="send">Envoyer</button>
       </form>
     `;
 

@@ -72,11 +72,15 @@ body {
   min-width: 100%;
   min-height: 100%;
   margin: 0;
+  padding: 0;
 }
 .lightbox__close {
   position: absolute;
   right: 0;
   top: 10%;
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 .lightbox__content {
   width: clamp(375px, 100%, 1400px);
@@ -150,10 +154,10 @@ select option {
   font-size: 0.8125rem;
 }
 .card__tagline {
-  font-size: 0.625rem;
+  font-size: 0.7rem;
 }
 .card__pricePerDay {
-  font-size: 0.5625rem;
+  font-size: 0.7rem;
   color: #757575;
 }
 .card a {
@@ -167,7 +171,7 @@ select option {
   padding: 2em;
   margin: auto;
   border: none;
-  position: relative;
+  position: fixed;
   box-shadow: -5px 10px 30px rgba(0, 0, 0, 0.25);
   font-family: "DM Sans", sans-serif;
 }
@@ -181,6 +185,9 @@ select option {
   position: absolute;
   top: 32px;
   right: 32px;
+  border: none;
+  background: none;
+  cursor: pointer;
 }
 .header-contact__title {
   font-size: 4rem;
@@ -249,7 +256,7 @@ select option {
   font-size: 4rem;
 }
 .description__location {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
 }
 .description__tagline {
   font-size: 1.125rem;
@@ -267,7 +274,7 @@ select option {
   display: flex;
   color: #901C1C;
   justify-content: space-between;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   margin-top: 0.4em;
 }
 .gallery-card__title {
@@ -304,6 +311,9 @@ select option {
   background-color: #901C1C;
   border-radius: 5px;
   cursor: pointer;
+}
+.contact_button:hover {
+  background-color: #651414;
 }
 
 .photographer_section {

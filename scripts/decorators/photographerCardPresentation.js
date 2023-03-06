@@ -12,15 +12,15 @@ export function photographerCardPresentation (photographer) {
   photographer.createPhotographeCard = function () {
     const card = `
       <div class="description">
-        <h2 class="description__name card__name"></h2>
+        <h1 class="description__name card__name"></h1>
         <p class="description__location card__location">
           <span class="description__city"></span>,
           <span class="description__country"></span>
         </p>
         <p class="description__tagline card__tagline"></p>
       </div>
-      <button type="button" class="contact_button" id="contact-form">Contactez-moi</button>
-      <img src="${photographer.image}" alt="" class="card__image">
+      <button type="button" aria-label="Contact Me" class="contact_button" id="contact-form">Contactez-moi</button>
+      <img src="${photographer.image}" alt="${photographer.name}" class="card__image">
     `
 
     photographer._wrapper.innerHTML = card;

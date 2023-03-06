@@ -38,7 +38,7 @@ export class PhotographeCard {
     // Pour une raison de securite les elements ne sont pas directement inclus
     // dans notre bloc card, en revanche on insert les valeurs des attributs
     const card = `
-      <a href="photographer.html?id=${this._photographer.id}">
+      <a href="photographer.html?id=${this._photographer.id}" aria-label="${this._photographer.name}">
         <img src="${this._photographer.image}" alt="" class="card__image">
         <h2 class="card__name"></h2>
       </a>
@@ -55,7 +55,6 @@ export class PhotographeCard {
     // on recupere les noms de propriete de notre objet photographer et on itere dessus
     // on test si il existe un element avec une class .card__nomElement
     // si oui on insere la valeur qui correspond
-    // ! question mentor: cette methode oblige de suivre une convention de nommage stricte en css
     Object.getOwnPropertyNames(this._photographer)
       .forEach(selector => {
         const element = this._wrapper.querySelector(`.card_${selector}`);

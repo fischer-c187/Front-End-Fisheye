@@ -11,6 +11,7 @@ export class Lightbox {
     this._currentElement = null;
     this._wrapper = document.createElement('dialog');
     this._wrapper.classList.add('lightbox');
+    this._wrapper.setAttribute('aria-label', 'image closeup view')
   }
 
   /**
@@ -53,6 +54,9 @@ export class Lightbox {
    */
   replaceMediaElement() {
     const oldMedia = this._wrapper.querySelector('.lightbox__image');
+    const alt = this._currentElement.querySelector(
+      '.gallery-card__title'
+    ).innerText;
 
     const src = this._currentElement
       .querySelector('.gallery-card__image')
@@ -63,6 +67,8 @@ export class Lightbox {
       ? this.createElement('video', src)
       : this.createElement('img', src);
 
+    mediaElement.setAttribute('alt', alt)
+    
     this._wrapper
       .querySelector('.lightbox__image')
       .parentNode.replaceChild(mediaElement, oldMedia);
@@ -174,13 +180,13 @@ export class Lightbox {
   render() {
     const lightboxContent = `
       <div class="lightbox__content">
-        <a href="#" class='lightbox__close'><i class="fa-solid fa-xmark lightbox__icon"></i></a>
-        <a href="#" class="lightbox__previousImage"><i class="fa-solid fa-angle-left lightbox__icon"></i></a>
+        <button type"button" class='lightbox__close' aria-label="Close dialog"><i class="fa-solid fa-xmark lightbox__icon"></i></button>
+        <a href="#" class="lightbox__previousImage" aria-label="Previous Image"><i class="fa-solid fa-angle-left lightbox__icon"></i></a>
         <div class="lightbox__media">
           <img src="" alt="" class='lightbox__image'>
           <p class="lightbox__title">test</p>
         </div>
-        <a href="#" class="lightbox__nextImage"><i class="fa-solid fa-angle-right lightbox__icon"></i></a>
+        <a href="#" class="lightbox__nextImage" aria-label="Next Image"><i class="fa-solid fa-angle-right lightbox__icon"></i></a>
       </div>
     `;
 

@@ -45,7 +45,7 @@ export class SorterForm {
           Trier par
         </label>
         <div class="select">
-        <select name="sorter-select" id="sorter-select" class="sorter-form__select">
+        <select name="sorter-select" id="sorter-select" class="sorter-form__select" aria-label="Order By">
             <option value="like">Popularité</option>
             <option value="date">Date</option>
             <option value="alpha">Titre</option>
