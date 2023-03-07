@@ -1,13 +1,12 @@
 /**
- * Cette class represente un photographe et contient toutes les infos
- * 
+ * This class represents a photographer and contains all the information
+ *
  * @class
  */
 export class Photographer {
-  
   /**
-   * creer une nouvelle instance de la classe Photographer
-   * 
+   * Create a new instance of the Photographer class
+   *
    * @param {Object} data
    */
   constructor(data) {
@@ -17,70 +16,69 @@ export class Photographer {
     this._country = data.country;
     this._tagline = data.tagline;
     this._price = data.price;
-    this._image = data.portrait
+    this._image = data.portrait;
   }
 
   /**
-   * retourne le nom du photographe
-   * 
+   * name getter
+   *
    * @returns {String} this._name
    */
-  get name () {
+  get name() {
     return this._name;
   }
 
   /**
-   * retourne l'id du photographe
-   * 
+   * id getter
+   *
    * @returns {Number} this._id
    */
-  get id () {
+  get id() {
     return this._id;
   }
 
   /**
-   * retourne la ville du photographe
-   * 
+   * city getter
+   *
    * @returns {String} this._city
    */
-  get city () {
+  get city() {
     return this._city;
   }
-  
+
   /**
-   * retourne le pays du photographe
-   * 
+   * country getter
+   *
    * @returns {String} this._country
    */
-  get country () {
+  get country() {
     return this._country;
   }
-  
+
   /**
-   * retourne le slogan du photographe
-   * 
+   * tagline getter
+   *
    * @returns {String} this._tagline
    */
-  get tagline () {
+  get tagline() {
     return this._tagline;
   }
-  
+
   /**
-   * retourne le prix a la journee du photographe
-   * 
+   * price per day getter
+   *
    * @returns {Number} this._price
    */
-  get price () {
+  get price() {
     return this._price;
   }
-  
+
   /**
-   * retourne l'url du portrait du photographe
-   * 
+   * Returns the portrait URL of the photographer
+   *
    * @returns {String} this._image
    */
-  get image () {
+  get image() {
     return `./assets/photographers/${this._image}`;
   }
-
 }

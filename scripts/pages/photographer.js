@@ -8,14 +8,14 @@ import { LikeSubject } from '../count/likeSubject.js';
 import { SorterForm } from '../template/sorterForm.js';
 import { Lightbox } from '../template/lightbox.js';
 import { ContactForm } from '../template/contactForm.js';
+
 /**
- * contient l'url de notre api/fichier json
+ * Contains the URL of our API/JSON file
  */
-const URLEndpoint = './data/photographers.json';
-
+const URL_ENDPOINT = './data/photographers.json';
 
 /**
- * Recupere et retourne l'id contenu dans les parametres dans l'url
+ * Retrieves and returns the id contained in the parameters in the URL
  * @returns {Number}
  */
 function getId() {
@@ -24,29 +24,32 @@ function getId() {
 }
 
 /**
- * instancie et retourne un objet photographe qui correspond a l'id de la page
+ * Instantiates and returns a Photographer object that corresponds to the page's id
  * @returns {Object Photographer}
  */
 async function getPhotographe() {
   const photographeObject = await new PhotographersApi(
-    URLEndpoint
+    URL_ENDPOINT
   ).photographById(getId());
   const photographe = new Photographer(photographeObject);
 
   return photographe;
 }
 
+/**
+ * Returns all media that corresponds to the photographer's id
+ */
 async function getAllMedia() {
-  const photosData = await new PhotoApi(URLEndpoint).getPhotosById(getId());
+  const photosData = await new PhotoApi(URL_ENDPOINT).getPhotosById(getId());
   const fullMedia = photosData.map((photoData) => new Media(photoData));
 
-  return fullMedia
+  return fullMedia;
 }
 
 /**
- * cree et ajoute a notre page un encart qui contient le prix par jour
- * et le nombre de like
- * @param {Number} price 
+ * Creates and adds to our page an insert that contains the daily price
+ * and the number of likes
+ * @param {Number} price
  */
 function renderInsert(price) {
   const information = document.createElement('div');
@@ -60,9 +63,10 @@ function renderInsert(price) {
 }
 
 /**
- * generation de l'affichage des informations du photographe
- * @param {Object Photographer} photographe 
+ * Generation of the display of the photographer's information
+ * @param {Object Photographer} photographer
  */
+
 async function renderPhotographer(photographe) {
   const photographeCard = new photographerCardPresentation(photographe);
 
@@ -73,11 +77,10 @@ async function renderPhotographer(photographe) {
 }
 
 /**
- * generation des elements de la gallerie et ajout dans la balise main
+ * Generation of the gallery elements and addition to the main tag
  */
 async function renderGallery(fullMedia) {
   const photoWrapper = document.querySelector('.photo-gallery');
-  
 
   const likeCounter = new LikeCounter();
   const likeObserver = new LikeSubject();
@@ -88,25 +91,23 @@ async function renderGallery(fullMedia) {
 
     photoWrapper.append(Template.createMediaCard());
   });
-
-  
 }
 
 /**
- * Fonction qui contient la logique principal d'affichage de notre page
+ * Function containing the main display logic for our page
  */
 async function main() {
   const photographe = await getPhotographe();
   const medias = await getAllMedia();
   const sorterPhoto = new SorterForm(medias);
   const lightbox = new Lightbox();
-  const contactForm = new ContactForm()
+  const contactForm = new ContactForm();
 
   await renderPhotographer(photographe);
   await renderGallery(medias);
-  lightbox.render()
-  sorterPhoto.render()
-  contactForm.render()
+  lightbox.render();
+  sorterPhoto.render();
+  contactForm.render();
 }
 
 main();

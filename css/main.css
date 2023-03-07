@@ -266,9 +266,10 @@ select option {
 
 .gallery-card__image {
   width: 100%;
-  height: 80%;
+  height: 100%;
   object-fit: cover;
   border-radius: 5px;
+  image-rendering: auto;
 }
 .gallery-card__description {
   display: flex;
@@ -282,6 +283,16 @@ select option {
 }
 .gallery-card__like {
   white-space: nowrap;
+}
+.gallery-card figure {
+  margin: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.open-lightbox {
+  height: 80%;
+  display: block;
 }
 
 .photographe-insert {

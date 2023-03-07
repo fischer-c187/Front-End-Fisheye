@@ -2,11 +2,9 @@ export class PhotoSorting {
   static sorte(data, orderBy) {
     if (orderBy === 'like') {
       data.sort((a, b) => b.likes - a.likes);
-    } 
-    else if (orderBy === 'alpha') {
+    } else if (orderBy === 'alpha') {
       data.sort((a, b) => a.title.localeCompare(b.title));
-    } 
-    else if (orderBy === 'date') {
+    } else if (orderBy === 'date') {
       data.sort((a, b) => {
         const d1 = new Date(a.date);
         const d2 = new Date(b.date);
@@ -17,5 +15,4 @@ export class PhotoSorting {
       throw 'unknow orderBy';
     }
   }
-
 }

@@ -1,10 +1,10 @@
 /**
- * Media correspond a une photo/video
+ * Media corresponds to a photo/video
  */
 export class Media {
   /**
-   * instancie notre class et stock les informations de notre media
-   * @param {Object} data contient les informations recuperer par l'api
+   * Instantiates our class and stores the information for our media
+   * @param {Object} data Contains the information retrieved from the API
    */
   constructor(data) {
     this._id = data.id;
@@ -12,72 +12,72 @@ export class Media {
     this._likes = data.likes;
     this._date = data.date;
     this._price = data.price;
-    // on test si notre object est une image et indique dans la propriete
-    // _type si c'est une video ou une photo
+    // We test if our object is an image and indicate in the
+    // _type property if it is a video or a photo
     if (data.hasOwnProperty('image')) {
       this._url = data.image;
       this._type = 'photo';
-    }
-    else {
+    } else {
       this._url = data.video;
       this._type = 'video';
     }
   }
 
   /**
-   * getter id de la photo
+   * Photo id getter
    */
-  get id () {
+  get id() {
     return this._id;
   }
   /**
-   * getter du titre de la photo
+   * Photo title getter
    */
-  get title () {
+  get title() {
     return this._title;
   }
   /**
-   * getter nombre de like
+   * number likes getter
    */
-  get likes () {
+  get likes() {
     return this._likes;
   }
   /**
-   * getter de la date de la prise du media
+   * date getter
    */
-  get date () {
+  get date() {
     return this._date;
   }
   /**
-   * getter du prix
+   * price getter
    */
-  get price () {
+  get price() {
     return this._price;
   }
   /**
-   * renvoie l'url du media
+   * url media getter
    */
-  get url () {
+  get url() {
     return `./assets/photos/${this._url}`;
   }
 
   /**
-   * nous indique si notre media est une photo ou une video
+   * Indicates whether our media is a photo or video
    * @returns {Boolean}
    */
   isImage() {
     return this._type === 'photo' ? true : false;
   }
+
   /**
-   * incremente le nombre total de like de la photo
+   * Increments the total number of likes for the photo
    */
-  incrementLike () {
+  incrementLike() {
     this._likes += 1;
   }
   /**
-   * decrement le nombre total de like de la photo
+   * Decrements the total number of likes for the photo
    */
-  decrementLike () {
+  decrementLike() {
     this._likes += 1;
   }
 }

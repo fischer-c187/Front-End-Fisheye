@@ -1,23 +1,23 @@
 /**
- * la class lightbox gere l'affichage de la galerie en grand format.
+ * The Lightbox class handles the display of the gallery in large format.
  * @class
  */
 export class Lightbox {
   /**
-   * creer une instance de la class lightbox
-   * la fenetre modal est initialisee a vide
+   * Create an instance of the Lightbox class
+   * The modal window is initialized as empty
    */
   constructor() {
     this._currentElement = null;
     this._wrapper = document.createElement('dialog');
     this._wrapper.classList.add('lightbox');
-    this._wrapper.setAttribute('aria-label', 'image closeup view')
+    this._wrapper.setAttribute('aria-label', 'image closeup view');
   }
 
   /**
-   * creer un element img ou video selon la balise demandee
-   * @param {String} balise la balise de l'element a creer : img ou video
-   * @param {String} src l'url de la source
+   * creates an img or video element based on the requested tag
+   * @param {String} tag the tag of the element to create: img or video
+   * @param {String} src the source URL
    * @returns {HTMLElement}
    */
   createElement(balise, src) {
@@ -31,9 +31,8 @@ export class Lightbox {
     return element;
   }
 
-  
   /**
-   * recupere le premier article de la page
+   * retrieves the first article on the page
    * @returns {HTMLElement}
    */
   getFirstArticle() {
@@ -41,7 +40,7 @@ export class Lightbox {
   }
 
   /**
-   * recupere le dernier element de la page
+   * retrieves the last element on the page
    * @returns {HTMLElement}
    */
   getLastArticle() {
@@ -50,7 +49,7 @@ export class Lightbox {
   }
 
   /**
-   * remplace l'element media dans la fenetre par celui de l'article courant
+   * replaces the media element in the lightbox with that of the current article
    */
   replaceMediaElement() {
     const oldMedia = this._wrapper.querySelector('.lightbox__image');
@@ -62,20 +61,20 @@ export class Lightbox {
       .querySelector('.gallery-card__image')
       .getAttribute('src');
 
-    // on genere notre balise selon la fin de la source
+    // generates the media tag based on the end of the source
     const mediaElement = src.endsWith('.mp4')
       ? this.createElement('video', src)
       : this.createElement('img', src);
 
-    mediaElement.setAttribute('alt', alt)
-    
+    mediaElement.setAttribute('alt', alt);
+
     this._wrapper
       .querySelector('.lightbox__image')
       .parentNode.replaceChild(mediaElement, oldMedia);
   }
-  
+
   /**
-   * remplace le titre du media par celui de l'article courant
+   * replaces the title of the media with that of the current article
    */
   replaceTitle() {
     const newTitle = this._currentElement.querySelector(
@@ -86,26 +85,42 @@ export class Lightbox {
   }
 
   /**
-   * gere la navigation du media afficher
-   * @param {String} direction permet de determine le sens de navigation
+   * Handles navigation of the displayed media
+   * @param {String} direction determines the direction of navigation
    */
   switchMedia(direction) {
     let newArticle = null;
     if (direction === 'next') {
       newArticle = this._currentElement.nextSibling;
+      console.log(this._currentElement)
       this._currentElement = newArticle ? newArticle : this.getFirstArticle();
     } else if (direction === 'previous') {
       newArticle = this._currentElement.previousSibling;
+      console.log(this._currentElement)
       this._currentElement = newArticle ? newArticle : this.getLastArticle();
     } else {
-      throw "unknow Direction"
+      throw 'unknow Direction';
     }
     this.replaceMediaElement();
     this.replaceTitle();
   }
 
   /**
-   * ouvre la lightbox lorsqu'on clique sur une image
+   * returns the article that corresponds to the image or link sent
+   * @param {HTMLElement} element
+   * @returns {HTMLElement}
+   */
+  getArticle(element) {
+    let actualElement = element;
+    while (actualElement.tagName !== 'ARTICLE') {
+      actualElement = actualElement.parentNode;
+    }
+
+    return actualElement;
+  }
+
+  /**
+   * opens the lightbox when an image is clicked
    */
   open() {
     const allLink = document.querySelectorAll('.open-lightbox');
@@ -114,19 +129,17 @@ export class Lightbox {
     allLink.forEach((element) => {
       element.addEventListener('click', (event) => {
         event.preventDefault();
-
-        this._currentElement = event.target.parentNode.parentNode;
-
+        this._currentElement = this.getArticle(event.target);
+        console.log(this._currentElement)
         this.replaceMediaElement(event.target);
         this.replaceTitle();
-        this.keyNavigation();
         this._wrapper.showModal();
       });
     });
   }
 
   /**
-   * ferme la lightbox quand on clique sur l'icone de fermeture
+   * closes the lightbox when clicking the close icon
    */
   close() {
     this._wrapper
@@ -138,7 +151,7 @@ export class Lightbox {
   }
 
   /**
-   * passe au media suivant quand on clique sur l'icone suivant
+   * Goes to the next media when clicking on the next icon
    */
   nextMedia() {
     this._wrapper
@@ -150,7 +163,7 @@ export class Lightbox {
   }
 
   /**
-   * passe au media precedent quand on clique sur l'icone precedent
+   * Goes to the previous media when clicking on the previous icon
    */
   previousMedia() {
     this._wrapper
@@ -162,11 +175,12 @@ export class Lightbox {
   }
 
   /**
-   * gere la navigation des medias avec les fleches du clavier
+   * Handles navigation of media using keyboard arrows.
    */
   keyNavigation() {
-    document.addEventListener('keydown', (event) => {
+    document.addEventListener('keyup', (event) => {
       if (event.code === 'ArrowRight') {
+        console.log('input')
         this.switchMedia('next');
       } else if (event.code === 'ArrowLeft') {
         this.switchMedia('previous');
@@ -175,7 +189,7 @@ export class Lightbox {
   }
 
   /**
-   * genere le contenu de la lightbox et initialise les events 
+   * Generates the content of the lightbox and initializes the events.
    */
   render() {
     const lightboxContent = `
@@ -195,7 +209,7 @@ export class Lightbox {
     this.close();
     this.nextMedia();
     this.previousMedia();
-
+    this.keyNavigation();
     document.querySelector('main').append(this._wrapper);
   }
 }

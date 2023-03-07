@@ -1,109 +1,104 @@
 /**
- * Class qui permet de gerer le telechargement des donnees
+ * Class for managing data downloads
  * @class
  */
 class Api {
-
   /**
-   * Creer une instance de Api
-   * @param {String} url endpoint 
+   * Create an instance of the Api
+   * @param {String} url Endpoint
    */
+
   constructor(url) {
-    this._url = url
+    this._url = url;
   }
 
   /**
-   * recupere nos donnees grace a la propriete url et renvoie les donnees sous format json
-   * @returns {Promise} Une promesse qui se resout quand les donnees sont bien recu et transformer en un objet json
+   * Retrieve our data using the url property and return the data in JSON format
+   * @returns {Promise} A promise that resolves when the data is successfully received and transformed into a JSON object
    */
-  async request () {
 
-    const response = await fetch(this._url)
+  async request() {
+    const response = await fetch(this._url);
 
     if (!response.ok) {
-      throw new Error(`Error in request: ${response.status} with this url ${this._url}`)
+      throw new Error(
+        `Error in request: ${response.status} with this url ${this._url}`
+      );
     }
 
-    return await response.json() 
+    return await response.json();
   }
-
 }
 
 /**
- * se concentre sur les donnes concernant les photographes
+ * Focuses on data regarding photographers
  * @class
  */
 export class PhotographersApi extends Api {
-
   /**
-   * Creer une instance de PhotographersApi
-   * @param {String} url endpoint
+   * Create an instance of the PhotographersApi
+   * @param {String} url Endpoint
    */
   constructor(url) {
-    super(url)
+    super(url);
   }
 
   /**
-   * TODO: peut etre faire un catch pour recuperer les erreurs
-   * nous retourne la liste des photographes 
-   * @returns {Promise} promesse resolut quand notre requete est termine
+   * Returns the list of photographers
+   * @returns {Promise} Promise resolved when the request is complete
    */
-  async allPhotographers () {
-    try{
+  async allPhotographers() {
+    try {
       const result = await this.request();
       return result.photographers;
-    }
-    catch(e) {
+    } catch (e) {
       console.error(e);
-      return []
+      return [];
     }
   }
 
-   /**
-   * nous retourne le photographe qui correspond a l'id
-   * 
+  /**
+   * Returns the photographer corresponding to the id
+   *
    * @param {Number} id
-   * 
-   * @returns {Promise} 
+   *
+   * @returns {Promise}
    */
-  async photographById (id) {
-    try{
+  async photographById(id) {
+    try {
       const result = await this.request();
-      return result.photographers
-        .find(photograph => photograph.id === id);
-    }
-    catch(e) {
+      return result.photographers.find((photograph) => photograph.id === id);
+    } catch (e) {
       console.error(e);
-      return []
+      return [];
     }
   }
 }
 
 /**
- * se concentre sur les donnes concernant les photos
+ * Focuses on data regarding photos
  * @class
  */
+
 export class PhotoApi extends Api {
   constructor(url) {
-    super(url)
+    super(url);
   }
 
   /**
-   * * peut etre faire un catch pour recuperer les erreurs
-   * nous retourne la liste des photos qui correspondent a l'id desire
-   * 
+   * Returns the list of photos corresponding to the desired id
+   *
    * @param {Number} id
-   * 
-   * @returns {Promise} promesse resolut quand notre requete est termine
+   *
+   * @returns {Promise} Promise resolved when the request is complete
    */
-  async getPhotosById (id) {
-    try{
+  async getPhotosById(id) {
+    try {
       const result = await this.request();
-      return result.media.filter(photo => photo.photographerId === id)
-    }
-    catch(e) {
+      return result.media.filter((photo) => photo.photographerId === id);
+    } catch (e) {
       console.error(e);
-      return []
+      return [];
     }
   }
 }

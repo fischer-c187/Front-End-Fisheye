@@ -1,17 +1,17 @@
 /**
- * class qui gere le formulaire de contact
+ * Class that manages the contact form
  * @class
  */
 export class ContactForm {
   /**
-   * creer une instance de la class ContactForm
-   * this._error nous permet de stocker le message d'erreur, la condition de la validation et
-   * la validite de tous les inputs de notre formulaire
+   * Create an instance of the ContactForm class
+   * this._error allows us to store the error message, the validation condition, and
+   * the validity of all the inputs in our form
    */
   constructor() {
     this._wrapper = document.createElement('dialog');
     this._wrapper.classList.add('contact-modal');
-    this._wrapper.setAttribute('aria-labelledby', 'contact-title-label')
+    this._wrapper.setAttribute('aria-labelledby', 'contact-title-label');
     this._error = {
       firstname: {
         message:
@@ -38,7 +38,7 @@ export class ContactForm {
   }
 
   /**
-   * ouverture du formulaire de contact
+   * Opens the contact form
    */
   open() {
     document.querySelector('#contact-form').addEventListener('click', () => {
@@ -47,7 +47,7 @@ export class ContactForm {
   }
 
   /**
-   * fermeture du formulaire de contact
+   * Closes the contact form
    */
   close() {
     this._wrapper
@@ -58,18 +58,18 @@ export class ContactForm {
   }
 
   /**
-   * nous permet de tester la validite d'un texte
-   * @param {RegExp} regex 
-   * @param {String} text 
+   * Allows us to test the validity of text
+   * @param {RegExp} regex
+   * @param {String} text
    * @returns {Boolean}
    */
   regexTest(regex, text) {
     return regex.test(text);
   }
-  
+
   /**
-   * nous permet de creer un element contennant l'erreur qui correspond a l'input recu en parametre
-   * @param {HTMLElement} element input qui contient l'erreur
+   * Allows us to create an element containing the error that corresponds to the input received as a parameter
+   * @param {HTMLElement} element input that contains the error
    * @returns {HTMLElement}
    */
   createErrorElement(element) {
@@ -85,15 +85,15 @@ export class ContactForm {
   }
 
   /**
-   * gere l'activation d'une erreur en ajoutant un label en-dessous de notre input
-   * la validite de notre input est passe a false dans notre objet error
-   * @param {HTMLElement} element input qui contient l'erreur
+   * Handles the activation of an error by adding a label below our input
+   * the validity of our input is set to false in our error object
+   * @param {HTMLElement} element input that contains the error
    */
   enableError(element) {
     let errorElement = document.querySelector(
       `.error-form[for=${element.name}]`
     );
-    // on test si le label existe deja, si ce n'est pas le cas on le cree et l'ajoute a notre formulaire
+    // We test if the label already exists, if not we create it and add it to our form
     if (!errorElement) {
       errorElement = this.createErrorElement(element);
       element.insertAdjacentElement('afterend', errorElement);
@@ -103,9 +103,9 @@ export class ContactForm {
   }
 
   /**
-   * quand l'input est valide on supprime le label d'erreur si il existe.
-   * et on passe a true notre input dans l'objet error
-   * @param {HTMLElement} element input qui est valide
+   * When the input is valid, we remove the error label if it exists.
+   * and we set to true our input in the error object
+   * @param {HTMLElement} element input that is valid
    */
   disableError(element) {
     const errorElement = document.querySelector(
@@ -119,9 +119,9 @@ export class ContactForm {
   }
 
   /**
-   * fonction associe a l'event blur/input sur nos input, on test la validite de l'input
-   * utilisation d'une fonction fleche pour ne pas modifier la valeur de this
-   * @param {Event} event 
+   * Function associated with the blur/input event on our inputs, testing the validity of the input
+   * use of an arrow function to not change the value of this
+   * @param {Event} event
    */
   validationInput = (event) => {
     const name = event.target.name;
@@ -136,7 +136,7 @@ export class ContactForm {
   };
 
   /**
-   * initilise tous les evenements de notre formulaire : inputs et bouton de soumission 
+   * Initializes all events of our form: inputs and submit button
    */
   initializeInputValidation() {
     const input = this._wrapper.querySelectorAll('.contact__input');
@@ -154,16 +154,16 @@ export class ContactForm {
   getAllValue() {
     const input = this._wrapper.querySelectorAll('.contact__input');
     const value = {};
-    input.forEach(element => {
+    input.forEach((element) => {
       value[element.name] = element.value;
     });
-    console.log(value)
+    console.log(value);
   }
 
   /**
-   * fonction associe au bouton de soumission du formulaire, on verifie si tous les inputs 
-   * sont valides et si ce n'est pas le cas insert une erreur en dessous des inputs concernes
-   * @param {Event} event 
+   * Function associated with the form submission button, checks if all inputs
+   * are valid and if not inserts an error below the concerned inputs
+   * @param {Event} event
    */
   validateForm = (event) => {
     event.preventDefault();
@@ -185,7 +185,7 @@ export class ContactForm {
   };
 
   /**
-   * affiche un message quand le formulaire est envoye avec succes
+   * Displays a success message when the form is successfully submitted
    */
   displaySuccessMessage() {
     const wrapperSuccess = document.createElement('div');
@@ -209,10 +209,9 @@ export class ContactForm {
   }
 
   /**
-   * Methode qui permet de generer et d'ajouter a la page le formulaire de contact
-   * pour le photographe en cours. Elle cree le contenu HTML du formulaire de contact
-   * puis le place dans notre element wrapper. Elle ajoute aussi les evenements necessaires
-   * pour ouvrir et fermer le formulaire ainsi que les validations d'inputs.
+   * This method generates and adds the contact form to the page for the current photographer.
+   * It creates the HTML content of the contact form and places it in our wrapper element.
+   * It also adds the necessary events to open and close the form as well as input validations.
    */
   render() {
     const photographe = document.querySelector('.description__name').innerText;

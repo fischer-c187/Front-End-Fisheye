@@ -1,45 +1,46 @@
 /**
- * cette classe permet de creer un objets qui gere l'affichage des photos
+ * This class creates an object that manages the display of photos.
  * @class
  */
 export class MediaCard {
   /**
-   * creer une instance de la class MediaCard.
+   * create an instance of the MediaCard class.
    * @param {Object Media} media
-   * @param {Object LikeSubject} likedObserver likedObserver sert a incrementer le total de like
+   * @param {Object LikeSubject} likedObserver likedObserver is used to increment the total number of likes
    */
   constructor(media, likedObserver) {
     this._media = media;
     this._wrapper = document.createElement('article');
     this._wrapper.classList.add('gallery-card');
-    this._wrapper.setAttribute('id', `id-${this._media.id}`)
+    this._wrapper.setAttribute('id', `id-${this._media.id}`);
     // nous permet de savoir si cette photo est deja like ou pas
     this._liked = false;
     this._Observer = likedObserver;
   }
 
-  get media () {
+  get media() {
     return this._media;
   }
 
   /**
-   * gestion du like sur les photos.
+   * Handling of the "like" on photos.
    */
   handleLikeButton() {
     const nbr = this._wrapper.querySelector('.gallery-card__nbrLike');
-    // nous permet d'ajouter le nombre de like de la photo au compteur total
+    // adds the photo's like count to the total like counter
     this._Observer.fire('ADD', this._media.likes);
 
-    // utilisation d'une fonction flechee pour eviter d'alterer this
+    // use an arrow function to avoid altering the value of 'this'
     this._wrapper
       .querySelector('.gallery-card__like')
       .addEventListener('click', (event) => {
+        event.preventDefault();
         if (this._liked) {
           nbr.innerText = parseInt(nbr.innerText, 10) - 1;
           this._Observer.fire('DECR');
           this._liked = false;
 
-          // on modifie le compteur global de notre objet media pour eviter les erreurs lors du tri par popularite 
+          // increments the total likes count of the photo
           this._media.decrementLike();
         } else {
           nbr.innerText = parseInt(nbr.innerText, 10) + 1;
@@ -51,9 +52,9 @@ export class MediaCard {
   }
 
   /**
-   * Creer et retourne une balise article qui contient l'image, le titre et le compteur de like
-   * 
-   * @returns {HMTLElement} 
+   * Creates and returns an article tag that contains the image, title, and like counter.
+   *
+   * @returns {HMTLElement}
    */
   createMediaCard() {
     let mediaBalise = null;
@@ -65,19 +66,21 @@ export class MediaCard {
     }
 
     const card = `
-      <a href="${this._media.url}" aria-label="Open Lightbox" class='open-lightbox'>
-        ${mediaBalise}
-      </a>
-      <div class="gallery-card__description">
-        <p class="gallery-card__title">
-        </p>
-        <p class="gallery-card__like" aria-label="likes" >
-          <span class="gallery-card__nbrLike">
-          </span>
-          <i class="fa-solid fa-heart"></i>
-        </p>
-      </div>
-    `;
+      <figure>
+        <a href="${this._media.url}" aria-label="Open Lightbox" class='open-lightbox'>
+          ${mediaBalise}
+        </a>
+        <figcaption class="gallery-card__description">
+          <p class="gallery-card__title">
+          </p>
+          <a href="" class="gallery-card__like" aria-label="likes" tabindex="0">
+            <span class="gallery-card__nbrLike">
+            </span>
+            <i class="fa-solid fa-heart"></i>
+          </a>
+        </figcaption>
+      </figure>
+      `;
     this._wrapper.innerHTML = card;
 
     this._wrapper.querySelector('.gallery-card__title').innerText =

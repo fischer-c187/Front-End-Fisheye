@@ -2,10 +2,10 @@
 
   &__image {
     width: 100%;
-    height: 80%;
+    height: 100%;
     object-fit: cover;
     border-radius: 5px;
-
+    image-rendering: auto;
   }
 
   &__description {
@@ -23,4 +23,15 @@
   &__like {
     white-space: nowrap;
   }
+
+  figure {
+    margin: 0;
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.open-lightbox {
+  height: 80%;
+  display: block;
 }
