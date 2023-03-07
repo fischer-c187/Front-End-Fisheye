@@ -12,8 +12,7 @@ export class Media {
     this._likes = data.likes;
     this._date = data.date;
     this._price = data.price;
-    // We test if our object is an image and indicate in the
-    // _type property if it is a video or a photo
+
     if (data.hasOwnProperty('image')) {
       this._url = data.image;
       this._type = 'photo';

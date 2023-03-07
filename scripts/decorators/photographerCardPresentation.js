@@ -7,7 +7,12 @@
 export function photographerCardPresentation(photographer) {
   photographer._wrapper = document.createElement('div');
   photographer._wrapper.classList.add('photograph-header');
-
+  
+  /**
+  * Creates the HTML structure for the photographer card
+  * @memberof photographer
+  * @returns {Element} photographer._wrapper - Returns the HTML element containing the photographer card
+  */
   photographer.createPhotographeCard = function () {
     const card = `
       <div class="description">

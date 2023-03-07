@@ -13,7 +13,6 @@ export class MediaCard {
     this._wrapper = document.createElement('article');
     this._wrapper.classList.add('gallery-card');
     this._wrapper.setAttribute('id', `id-${this._media.id}`);
-    // nous permet de savoir si cette photo est deja like ou pas
     this._liked = false;
     this._Observer = likedObserver;
   }
@@ -39,8 +38,6 @@ export class MediaCard {
           nbr.innerText = parseInt(nbr.innerText, 10) - 1;
           this._Observer.fire('DECR');
           this._liked = false;
-
-          // increments the total likes count of the photo
           this._media.decrementLike();
         } else {
           nbr.innerText = parseInt(nbr.innerText, 10) + 1;

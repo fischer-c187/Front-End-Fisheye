@@ -32,8 +32,6 @@ export class PhotographeCard {
    * @returns {Element} this._wrapper
    */
   createPhotographeCard() {
-    // For security reasons, the elements are not directly included
-    // in our card block, but the attribute values are inserted instead.
     const card = `
       <a href="photographer.html?id=${this._photographer.id}" aria-label="${this._photographer.name}">
         <img src="${this._photographer.image}" alt="" class="card__image">

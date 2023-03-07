@@ -61,7 +61,6 @@ export class Lightbox {
       .querySelector('.gallery-card__image')
       .getAttribute('src');
 
-    // generates the media tag based on the end of the source
     const mediaElement = src.endsWith('.mp4')
       ? this.createElement('video', src)
       : this.createElement('img', src);
@@ -92,11 +91,9 @@ export class Lightbox {
     let newArticle = null;
     if (direction === 'next') {
       newArticle = this._currentElement.nextSibling;
-      console.log(this._currentElement)
       this._currentElement = newArticle ? newArticle : this.getFirstArticle();
     } else if (direction === 'previous') {
       newArticle = this._currentElement.previousSibling;
-      console.log(this._currentElement)
       this._currentElement = newArticle ? newArticle : this.getLastArticle();
     } else {
       throw 'unknow Direction';
@@ -130,7 +127,6 @@ export class Lightbox {
       element.addEventListener('click', (event) => {
         event.preventDefault();
         this._currentElement = this.getArticle(event.target);
-        console.log(this._currentElement)
         this.replaceMediaElement(event.target);
         this.replaceTitle();
         this._wrapper.showModal();
@@ -180,7 +176,6 @@ export class Lightbox {
   keyNavigation() {
     document.addEventListener('keyup', (event) => {
       if (event.code === 'ArrowRight') {
-        console.log('input')
         this.switchMedia('next');
       } else if (event.code === 'ArrowLeft') {
         this.switchMedia('previous');

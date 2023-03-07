@@ -93,7 +93,7 @@ export class ContactForm {
     let errorElement = document.querySelector(
       `.error-form[for=${element.name}]`
     );
-    // We test if the label already exists, if not we create it and add it to our form
+
     if (!errorElement) {
       errorElement = this.createErrorElement(element);
       element.insertAdjacentElement('afterend', errorElement);
@@ -150,7 +150,10 @@ export class ContactForm {
       .querySelector('.contact__submit')
       .addEventListener('click', this.validateForm);
   }
-
+  
+  /**
+   * Retrieve all the values from the inputs and display them in the console.
+   */
   getAllValue() {
     const input = this._wrapper.querySelectorAll('.contact__input');
     const value = {};
