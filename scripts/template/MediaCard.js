@@ -10,15 +10,65 @@ export class MediaCard {
    */
   constructor(media, likedObserver) {
     this._media = media;
+    this._Observer = likedObserver;
+    this._LSlikedPhotos = this.initialiseLocalStorage();
+    this._liked = this.likeInLocalStorage();
+
     this._wrapper = document.createElement('article');
     this._wrapper.classList.add('gallery-card');
     this._wrapper.setAttribute('id', `id-${this._media.id}`);
-    this._liked = false;
-    this._Observer = likedObserver;
+
+    this.updateNbrLike();
   }
 
-  get media() {
-    return this._media;
+  /**
+   * Initializes the LocalStorage to store liked photos
+   *
+   * @return {Object} The liked photos stored in the LocalStorage
+   */
+  initialiseLocalStorage = () => {
+    if (!localStorage.getItem('likedPhotos')) {
+      localStorage.setItem(
+        'likedPhotos',
+        JSON.stringify({ [this._media.id]: false })
+      );
+    }
+
+    return JSON.parse(localStorage.getItem('likedPhotos'));
+  };
+
+  /**
+   * Updates the LocalStorage with the value of the like
+   *
+   * @param {boolean} value - The value of the like
+   */
+  updateLocalStorage(value) {
+    this._LSlikedPhotos[this._media.id] = value;
+    localStorage.setItem('likedPhotos', JSON.stringify(this._LSlikedPhotos));
+  }
+
+  /**
+   * Checks if the photo is liked in the LocalStorage
+   * If the photo is not liked, it is added to the LocalStorage
+   *
+   * @return {boolean} The value of the like in the LocalStorage
+   */
+  likeInLocalStorage() {
+    if (this._LSlikedPhotos[this._media.id]) {
+      return JSON.parse(localStorage.getItem('likedPhotos'))[this._media.id];
+    } else {
+      this.updateLocalStorage(false);
+      return false;
+    }
+  }
+
+  /**
+   * Updates the number of likes of the photo if it is liked in the LocalStorage
+   */
+  updateNbrLike() {
+    if (this._LSlikedPhotos[this._media.id] === true) {
+      this._media.incrementLike();
+    }
   }
 
   /**
@@ -38,11 +88,13 @@ export class MediaCard {
           nbr.innerText = parseInt(nbr.innerText, 10) - 1;
           this._Observer.fire('DECR');
           this._liked = false;
+          this.updateLocalStorage(false);
           this._media.decrementLike();
         } else {
           nbr.innerText = parseInt(nbr.innerText, 10) + 1;
           this._Observer.fire('INCR');
           this._liked = true;
+          this.updateLocalStorage(true);
           this._media.incrementLike();
         }
       });
