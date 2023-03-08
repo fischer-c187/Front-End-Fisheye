@@ -1,0 +1,22 @@
+{
+  "name": "p6_fisheye",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fischer-c187/Front-End-Fisheye.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fischer-c187/Front-End-Fisheye/issues"
+  },
+  "homepage": "https://github.com/fischer-c187/Front-End-Fisheye#readme",
+  "devDependencies": {
+    "eslint": "^8.35.0"
+  }
+}

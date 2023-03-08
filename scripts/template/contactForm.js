@@ -26,7 +26,7 @@ export class ContactForm {
       },
       email: {
         message: 'Veuillez entrer un email valide..',
-        condition: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+        condition: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
         valid: false,
       },
       message: {

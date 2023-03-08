@@ -13,7 +13,7 @@ export class Media {
     this._date = data.date;
     this._price = data.price;
 
-    if (data.hasOwnProperty('image')) {
+    if (Object.prototype.hasOwnProperty.call(data, 'image')) {
       this._url = data.image;
       this._type = 'photo';
     } else {
