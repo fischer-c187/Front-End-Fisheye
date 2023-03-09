@@ -22,6 +22,8 @@
 
   &__like {
     white-space: nowrap;
+    display: flex;
+    gap: 10px;
   }
 
   figure {

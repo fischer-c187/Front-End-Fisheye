@@ -1,0 +1,8 @@
+@keyframes heart {
+  0% {
+    transform: translatey(0) rotate(0deg) scale(2);
+  }
+  100% {
+    transform: translatey(-120%) rotate(360deg) scale(2);
+  }
+}

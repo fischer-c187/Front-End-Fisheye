@@ -1,0 +1,26 @@
+.heart {
+  width: 25px;
+
+  &__fill {
+    fill: $location-color;
+  }
+
+  &__mask {
+    fill: white;
+    transform: scale(2);
+    transform-origin: center;
+  }
+
+  &__stroke {
+    transition: opacity 1s;
+    fill: $location-color;
+  }
+}
+
+.heart-anime {
+  animation: heart 1500ms both;
+}
+
+.heart--liked {
+  opacity: 0;
+}

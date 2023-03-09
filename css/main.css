@@ -32,6 +32,14 @@ select {
   border: none;
 }
 
+@keyframes heart {
+  0% {
+    transform: translatey(0) rotate(0deg) scale(2);
+  }
+  100% {
+    transform: translatey(-120%) rotate(360deg) scale(2);
+  }
+}
 body {
   width: clamp(375px, 90%, 1300px);
   font-family: "DM Sans", sans-serif;
@@ -283,6 +291,8 @@ select option {
 }
 .gallery-card__like {
   white-space: nowrap;
+  display: flex;
+  gap: 10px;
 }
 .gallery-card figure {
   margin: 0;
@@ -309,6 +319,30 @@ select option {
   border-radius: 5px 5px 0 0;
   font-size: 1.5rem;
   font-weight: 700;
+}
+
+.heart {
+  width: 25px;
+}
+.heart__fill {
+  fill: #901C1C;
+}
+.heart__mask {
+  fill: white;
+  transform: scale(2);
+  transform-origin: center;
+}
+.heart__stroke {
+  transition: opacity 1s;
+  fill: #901C1C;
+}
+
+.heart-anime {
+  animation: heart 1500ms both;
+}
+
+.heart--liked {
+  opacity: 0;
 }
 
 .contact_button {
