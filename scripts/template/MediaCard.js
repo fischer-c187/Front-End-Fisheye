@@ -43,8 +43,9 @@ export class MediaCard {
    * @param {boolean} value - The value of the like
    */
   updateLocalStorage(value) {
-    this._LSlikedPhotos[this._media.id] = value;
-    localStorage.setItem('likedPhotos', JSON.stringify(this._LSlikedPhotos));
+    const temp = JSON.parse(localStorage.getItem('likedPhotos'))
+    temp[this._media.id] = value;
+    localStorage.setItem('likedPhotos', JSON.stringify(temp));
   }
 
   /**
@@ -54,7 +55,7 @@ export class MediaCard {
    * @return {boolean} The value of the like in the LocalStorage
    */
   likeInLocalStorage() {
-    if (this._LSlikedPhotos[this._media.id]) {
+    if (JSON.parse(localStorage.getItem('likedPhotos'))[this._media.id]) {
       return JSON.parse(localStorage.getItem('likedPhotos'))[this._media.id];
     } else {
       this.updateLocalStorage(false);
@@ -66,7 +67,7 @@ export class MediaCard {
    * Updates the number of likes of the photo if it is liked in the LocalStorage
    */
   updateNbrLike() {
-    if (this._LSlikedPhotos[this._media.id] === true) {
+    if (JSON.parse(localStorage.getItem('likedPhotos'))[this._media.id] === true) {
       this._media.incrementLike();
     }
   }
